@@ -18,6 +18,7 @@ services:
     build:
       context: ./backend
     container_name: backend_ilcs
+    image: node:23
     ports:
       - "3000:3000"
     depends_on:
