@@ -17,7 +17,6 @@ services:
   backend:
     build:
       context: ./backend
-    image: node:23
     container_name: backend_ilcs
     ports:
       - "3000:3000"
@@ -25,6 +24,21 @@ services:
       - mysql
     volumes:
       - ./backend:/usr/src/app
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend_ilcs
+    image: node:23
+    depends_on:
+      - mysql
+      - backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
 
 volumes:
   mysql-data:
+  node_modules:
