@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
 const routes = require('./routes/karyawan')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
@@ -23,6 +24,12 @@ db.connect((err) => {
     }
     console.log('Terhubung ke database MySQL!');
 });
+
+app.use(cors({
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  }));
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
