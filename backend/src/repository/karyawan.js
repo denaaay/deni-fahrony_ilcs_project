@@ -11,7 +11,13 @@ const getAllKaryawan = async () => {
     return result
 }
 
+const updateKaryawan = async (nik, nama, alamat, tgllahir, stat) => {
+    const query = 'CALL update_karyawan(?, ?, ?, ?, ?)';
+    return await db.query(query, [nama, alamat, tgllahir, stat, nik]);
+};
+
 module.exports = {
     addKaryawan,
     getAllKaryawan,
+    updateKaryawan,
 }

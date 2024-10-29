@@ -51,3 +51,26 @@ END $$
 
 DELIMITER ;
 
+
+-- Membuat stored procedure untuk mengedit karyawan
+DELIMITER $$
+
+CREATE PROCEDURE update_karyawan (
+    IN p_nama VARCHAR(150),
+    IN p_alamat TEXT,
+    IN p_tgllahir DATETIME,
+    IN p_stat VARCHAR(20),
+    IN p_nik VARCHAR(8)
+)
+BEGIN
+    UPDATE m_karyawan
+    SET 
+        nama = p_nama,
+        alamat = p_alamat,
+        tgllahir = p_tgllahir,
+        status = p_stat,
+        created_date = CURRENT_TIMESTAMP
+    WHERE nik = p_nik;
+END $$
+
+DELIMITER ;

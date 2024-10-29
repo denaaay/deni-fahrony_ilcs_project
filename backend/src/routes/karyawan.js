@@ -10,5 +10,6 @@ router.get('/', (_, res) => {
 // karyawan routes
 router.get('/karyawan', karyawanController.getAllKaryawan)
 router.post('/karyawan', karyawanController.addKaryawan)
+router.put('/karyawan/:nik', karyawanController.updateKaryawan)
 
 module.exports = router

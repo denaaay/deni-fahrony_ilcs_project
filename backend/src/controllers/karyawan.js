@@ -50,7 +50,37 @@ const getAllKaryawan = async (_, res) => {
     }
 }
 
+const updateKaryawan = async (req, res) => {
+    try {
+        const nik = req.params.nik
+        const nama = req.body.nama
+        const alamat = req.body.alamat
+        const tgllahir = req.body.tanggal_lahir
+        const stat = req.body.status
+
+        if (!nama || !alamat || !tgllahir || !stat) {
+            return res.status(400).json({
+                message: 'all fields must be fully filled',
+            });
+        }
+
+        await karyawanRepo.updateKaryawan(nik, nama, alamat, tgllahir, stat)
+        res.status(200).json({
+            status_code: 200,
+            message: 'success updating karyawan'
+        })
+        return
+    } catch (e) {
+        res.status(500).json({
+            status_code: 500,
+            message: `internal server error : ${e.message}`
+        })
+        return
+    }
+}
+
 module.exports = {
     addKaryawan,
     getAllKaryawan,
+    updateKaryawan,
 }
