@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS m_karyawan;
+DROP DATABASE IF EXISTS db_ilcs;
