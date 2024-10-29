@@ -50,6 +50,35 @@ const getAllKaryawan = async (_, res) => {
     }
 }
 
+const getKaryawanByNik = async (req, res) => {
+    try {
+        const nik = req.params.nik
+
+        const karyawan = await karyawanRepo.getKaryawanByNik(nik)
+        
+        if (karyawan[0].length === 0) {
+            res.status(404).json({
+                status_code: 404,
+                message: 'karyawan not found'
+            })
+            return
+        }
+
+        res.status(200).json({
+            status_code: 200,
+            message: 'success getting karyawan by nik',
+            data: karyawan[0],
+        })
+        return
+    } catch (e) {
+        res.status(500).json({
+            status_code: 500,
+            message: `internal server error : ${e.message}`
+        })
+        return
+    }
+}
+
 const updateKaryawan = async (req, res) => {
     try {
         const nik = req.params.nik
@@ -57,6 +86,15 @@ const updateKaryawan = async (req, res) => {
         const alamat = req.body.alamat
         const tgllahir = req.body.tanggal_lahir
         const stat = req.body.status
+
+        const karyawan = await karyawanRepo.getKaryawanByNik(nik)
+        if (karyawan[0].length === 0) {
+            res.status(404).json({
+                status_code: 404,
+                message: 'karyawan not found'
+            })
+            return
+        }
 
         if (!nama || !alamat || !tgllahir || !stat) {
             return res.status(400).json({
@@ -83,6 +121,15 @@ const deleteKaryawan = async (req, res) => {
     try {
         const nik = req.params.nik
 
+        const karyawan = await karyawanRepo.getKaryawanByNik(nik)
+        if (karyawan[0].length === 0) {
+            res.status(404).json({
+                status_code: 404,
+                message: 'karyawan not found'
+            })
+            return
+        }
+
         await karyawanRepo.deleteKaryawan(nik)
         res.status(200).json({
             status_code: 200,
@@ -101,6 +148,7 @@ const deleteKaryawan = async (req, res) => {
 module.exports = {
     addKaryawan,
     getAllKaryawan,
+    getKaryawanByNik,
     updateKaryawan,
     deleteKaryawan
 }

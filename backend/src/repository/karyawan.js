@@ -11,6 +11,11 @@ const getAllKaryawan = async () => {
     return result
 }
 
+const getKaryawanByNik = async (nik) => {
+    const query = 'select nama, alamat, tgllahir, divisi, status from m_karyawan where nik = ?'
+    return result = await db.query(query, [nik])
+}
+
 const updateKaryawan = async (nik, nama, alamat, tgllahir, stat) => {
     const query = 'call update_karyawan(?, ?, ?, ?, ?)'
     return await db.query(query, [nama, alamat, tgllahir, stat, nik])
@@ -24,6 +29,7 @@ const deleteKaryawan = async (nik) => {
 module.exports = {
     addKaryawan,
     getAllKaryawan,
+    getKaryawanByNik,
     updateKaryawan,
     deleteKaryawan,
 }

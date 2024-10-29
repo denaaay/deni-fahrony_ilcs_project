@@ -9,6 +9,7 @@ router.get('/', (_, res) => {
 
 // karyawan routes
 router.get('/karyawan', karyawanController.getAllKaryawan)
+router.get('/karyawan/:nik', karyawanController.getKaryawanByNik)
 router.post('/karyawan', karyawanController.addKaryawan)
 router.put('/karyawan/:nik', karyawanController.updateKaryawan)
 router.delete('/karyawan/:nik', karyawanController.deleteKaryawan)
