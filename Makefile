@@ -14,9 +14,9 @@ createdb:
 	docker exec -i mysql_ilcs mysql -u root -prootsecret -e "CREATE DATABASE db_ilcs;"
 
 migrateup:
-	docker exec -i mysql_ilcs mysql -u root -prootsecret db_ilcs < ./db/migration/create_tables.sql
+	docker exec -i mysql_ilcs mysql -u root -prootsecret db_ilcs < ./db/migration/init_db.sql
 
 migratedown:
-	docker exec -i mysql_ilcs mysql -u root -prootsecret db_ilcs < ./db/migration/drop_tables.sql
+	docker exec -i mysql_ilcs mysql -u root -prootsecret db_ilcs < ./db/migration/drop_db.sql
 
 .PHONY: mysqlup backendup down createdb migrateup migratedown backend
