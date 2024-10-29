@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS m_karyawan (
 -- Membuat stored procedure untuk menambah karyawan
 DELIMITER $$
 
-CREATE PROCEDURE sp_add_karyawan(
+CREATE PROCEDURE add_karyawan(
     IN p_nama VARCHAR(150),
     IN p_alamat TEXT,
     IN p_tgllahir DATETIME,

@@ -1,6 +1,9 @@
 const express = require('express');
 const mysql = require('mysql2');
-require('dotenv').config();
+const bodyParser = require('body-parser');
+const path = require('path');
+const routes = require('./routes/karyawan')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,9 +24,11 @@ db.connect((err) => {
     console.log('Terhubung ke database MySQL!');
 });
 
-app.get('/', (req, res) => {
-    res.send('Selamat datang di API Karyawan!');
-});
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+app.use('/api', routes)
 
 app.listen(port, () => {
     console.log(`Server berjalan di http://localhost:${port}`);
