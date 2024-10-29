@@ -8,6 +8,7 @@ router.get('/', (_, res) => {
 })
 
 // karyawan routes
+router.get('/karyawan', karyawanController.getAllKaryawan)
 router.post('/karyawan', karyawanController.addKaryawan)
 
 module.exports = router
