@@ -74,3 +74,16 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- Membuat stored procedure untuk menghapus karyawan
+DELIMITER $$
+
+CREATE PROCEDURE delete_karyawan (
+    IN p_nik VARCHAR(8)
+)
+BEGIN
+    DELETE FROM m_karyawan
+    WHERE nik = p_nik;
+END $$
+
+DELIMITER ;

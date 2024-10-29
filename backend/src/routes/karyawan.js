@@ -11,5 +11,6 @@ router.get('/', (_, res) => {
 router.get('/karyawan', karyawanController.getAllKaryawan)
 router.post('/karyawan', karyawanController.addKaryawan)
 router.put('/karyawan/:nik', karyawanController.updateKaryawan)
+router.delete('/karyawan/:nik', karyawanController.deleteKaryawan)
 
 module.exports = router

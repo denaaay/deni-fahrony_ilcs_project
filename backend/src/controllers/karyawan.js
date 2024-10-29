@@ -79,8 +79,28 @@ const updateKaryawan = async (req, res) => {
     }
 }
 
+const deleteKaryawan = async (req, res) => {
+    try {
+        const nik = req.params.nik
+
+        await karyawanRepo.deleteKaryawan(nik)
+        res.status(200).json({
+            status_code: 200,
+            message: 'success deleting kryawan'
+        })
+        return
+    } catch (e) {
+        res.status(500).json({
+            status_code: 500,
+            message: `internal server error : ${e.message}`
+        })
+        return
+    }
+}
+
 module.exports = {
     addKaryawan,
     getAllKaryawan,
     updateKaryawan,
+    deleteKaryawan
 }
