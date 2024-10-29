@@ -38,7 +38,7 @@ The project uses Docker Compose to manage multiple services, including a MySQL d
 
 1. **Just landing**
     ```bash
-    just landing: http://localhost:3000/api/
+    http://localhost:3000/api/
 2. **Get All Karyawan (GET)**
     ```bash
     http://localhost:3000/api/karyawan
