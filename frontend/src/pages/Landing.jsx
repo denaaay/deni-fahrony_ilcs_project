@@ -40,9 +40,33 @@ export default function Landing() {
         navigate('/add-karyawan')
     }
 
+    const handleEdit = (nik) => {
+        navigate(`/edit-karyawan/${nik}`)
+    }
+
+    const handleDelete = async (nik) => {
+        try {
+            const response = await fetch(
+                `http://localhost:3000/api/karyawan/${nik}`, {
+                    method: 'delete',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+
+            const data = await response.json();
+            if (data.status_code === 200){
+                window.location.reload();
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
     return(
         <div className="w-full h-full flex justify-center">
-            <Navbar />
+            <Navbar title="Dashboard"/>
             <div className="mt-32 w-[80vw]">
                 <div className="w-full h-max flex justify-between items-center text-xl text-black font-bold mb-4">
                     <p>Data Karyawan</p>
@@ -71,8 +95,8 @@ export default function Landing() {
                                     <td className="py-2 px-4 border border-gray-300 text-center">{employee.status}</td>
                                     <td className="py-2 px-4 border border-gray-300 text-center">{employee.divisi}</td>
                                     <td className="py-2 px-4 border border-gray-300 text-center">
-                                        <button className="bg-primary text-white text-sm text-light px-4 py-2 rounded border transition hover:bg-white hover:border-primary hover:text-primary">Edit</button>
-                                        <button className="bg-red-500 text-white text-sm text-light px-4 py-2 rounded border transition hover:bg-white hover:border-red-500 hover:text-red-500">Delete</button>
+                                        <button onClick={() => handleEdit(employee.nik)} className="bg-primary text-white text-sm text-light px-4 py-2 rounded border transition hover:bg-white hover:border-primary hover:text-primary">Edit</button>
+                                        <button onClick={() => handleDelete(employee.nik)} className="bg-red-500 text-white text-sm text-light px-4 py-2 rounded border transition hover:bg-white hover:border-red-500 hover:text-red-500">Delete</button>
                                     </td>
                                 </tr>
                             })}
