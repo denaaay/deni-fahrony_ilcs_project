@@ -2,10 +2,12 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { format } from 'date-fns';
+import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
     const [employees, setEmployees] = useState([]);
     const [nodata, setNodata] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getAllKaryawan = async () => {
@@ -34,13 +36,17 @@ export default function Landing() {
         getAllKaryawan()
     }, [])
 
+    const addKaryawan = () => {
+        navigate('/add-karyawan')
+    }
+
     return(
         <div className="w-full h-full flex justify-center">
             <Navbar />
             <div className="mt-32 w-[80vw]">
                 <div className="w-full h-max flex justify-between items-center text-xl text-black font-bold mb-4">
                     <p>Data Karyawan</p>
-                    <button className="bg-primary text-white text-sm text-light px-4 py-2 rounded border transition hover:bg-white hover:border-primary hover:text-primary">Tambah Karyawan</button>
+                    <button onClick={addKaryawan} className="bg-primary text-white text-sm text-light px-4 py-2 rounded border transition hover:bg-white hover:border-primary hover:text-primary">Tambah Karyawan</button>
                 </div>
                 <table className="min-w-full bg-white border">
                     <thead>
