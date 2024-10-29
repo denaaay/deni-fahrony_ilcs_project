@@ -1,10 +1,13 @@
 # variables
 COMPOSE_FILE = docker-compose.yml
 
-build:
-	docker-compose -f $(COMPOSE_FILE) up -d --build
+mysqlup:
+	docker-compose -f $(COMPOSE_FILE) up -d --build mysql
 
-delete:
+backendup:
+	docker-compose -f $(COMPOSE_FILE) up -d --build backend
+
+down:
 	docker-compose -f $(COMPOSE_FILE) down
 
 createdb:
@@ -16,4 +19,4 @@ migrateup:
 migratedown:
 	docker exec -i mysql_ilcs mysql -u root -prootsecret db_ilcs < ./db/migration/drop_tables.sql
 
-.PHONY: build delete createdb migrateup migratedown
+.PHONY: mysqlup backendup down createdb migrateup migratedown backend
