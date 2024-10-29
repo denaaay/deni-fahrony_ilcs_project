@@ -4,7 +4,9 @@ FROM node:23
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json ./
+COPY postcss.config.js ./
+COPY tailwind.config.js ./
 
 RUN npm install
 

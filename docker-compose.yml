@@ -3,7 +3,7 @@ version: '3.9'
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql_ilcs
+    container_name: db_ilcs
     environment:
       MYSQL_ROOT_PASSWORD: rootsecret
       MYSQL_DATABASE: db_ilcs
@@ -23,7 +23,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ./backend:/usr/src/app
+      - ./backend:/usr/src/app:cached
   
   frontend:
     build:
@@ -37,8 +37,7 @@ services:
       - "3001:3001"
     volumes:
       - ./frontend:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
+      - /usr/src/app/node_modules
 
 volumes:
   mysql-data:
-  node_modules:
